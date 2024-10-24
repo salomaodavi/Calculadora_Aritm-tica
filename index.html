@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora VueJS</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+  <div id="app">
+    <h2>Calculadora Aritmética</h2>
+    
+    <!-- Campos de entrada -->
+    <input type="number" v-model="num1" placeholder="Insira o primeiro número">
+    <input type="number" v-model="num2" placeholder="Insira o segundo número">
+
+    <!-- Seleção da operação -->
+    <select v-model="operation">
+      <option value="sum">Somar</option>
+      <option value="subtract">Subtrair</option>
+      <option value="multiply">Multiplicar</option>
+      <option value="divide">Dividir</option>
+    </select>
+
+    <!-- Exibir o resultado -->
+    <p>Resultado: {{ result }}</p>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        num1: 0,
+        num2: 0,
+        operation: 'sum'
+      },
+      computed: {
+        result() {
+          const n1 = parseFloat(this.num1);
+          const n2 = parseFloat(this.num2);
+
+          switch (this.operation) {
+            case 'sum':
+              return n1 + n2;
+            case 'subtract':
+              return n1 - n2;
+            case 'multiply':
+              return n1 * n2;
+            case 'divide':
+              return n2 !== 0 ? n1 / n2 : 'Erro: Divisão por zero';
+            default:
+              return 0;
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
